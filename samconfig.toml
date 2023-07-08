@@ -1,0 +1,13 @@
+# samconfig.toml tells AWS-SAM in which way to deploy the resources in template.yml to AWS (which region etc.)
+# Alternatively, run "sam deploy --guided" to create your own configuration.
+
+version = 0.1
+[default.deploy.parameters]
+stack_name = "lambda-openai"
+resolve_s3 = true
+s3_prefix = "lambda-openai"
+region = "eu-central-1"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []

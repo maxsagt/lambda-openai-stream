@@ -1,0 +1,32 @@
+# template.yml tells AWS-SAM what resources we need to build for our application.
+
+AWSTemplateFormatVersion: '2010-09-09' # Specifies the AWS CloudFormation template version.
+Transform: AWS::Serverless-2016-10-31 # Specifies that the file is an AWS SAM template.
+
+# What resources we want to create in AWS
+Resources:
+  lambdaopenai: # The name of the resource.
+    Type: AWS::Serverless::Function # The resource is a Lambda function.
+    Properties:
+      CodeUri: ./src # The location of the function code is in the current directory.
+      Handler: index.handler # The file and the method in your code that AWS Lambda calls.
+      Runtime: nodejs18.x # The runtime environment.
+      Architectures: # arm64 or x86_64.
+        - arm64
+      MemorySize: 512 # Lambda function memory in MB.
+      Timeout: 30 # The amount of time that Lambda allows a function to run before stopping it.
+      FunctionUrlConfig:
+        AuthType: NONE # The function can be called by anyone via a public URL.
+        InvokeMode: RESPONSE_STREAM # The function is returning the response as stream.
+
+# When everything is done, return information about the created resources
+Outputs:
+  endpoint:
+      Description: "Lambda Function URL Endpoint"
+      Value:
+        Fn::GetAtt: lambdaopenaiUrl.FunctionUrl
+  endpointexample:
+    Description: "Lambda Function URL Endpoint Example"
+    Value: !Sub
+      - "${FunctionUrl}?message=Ask%20a%20question%20Question:%20"
+      - FunctionUrl: !GetAtt lambdaopenaiUrl.FunctionUrl
