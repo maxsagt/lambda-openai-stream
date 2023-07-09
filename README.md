@@ -34,7 +34,7 @@ __Lambda-OpenAI-Stream__ lets you stream OpenAI responses via an AWS Lambda Func
     ```
 5. Deploy to AWS. Note that your AWS user or role needs (temporary) IAM permissions for AWS CloudFormation, S3, Lambda and IAM.
     ```sh
-    sam deploy
+    sam build --cached --parallel
     # Use sam deploy --guided to control the AWS region.
     ```
 6. Done. Your Lambda Function URL is displayed in the terminal, and you can find it in AWS. 

@@ -20,17 +20,17 @@ export const handler = awslambda.streamifyResponse(
 
     // Stream OpenAI response 1
     const res_1 = await streamOpenAIResponse(responseStream, {
-      messages: [{ role: "user", content: event.queryStringParameters.message }], // The user's message
+      messages: [{ role: "user", content: event.queryStringParameters.message }], // The user's message (in testing from event.json)
       model: "gpt-3.5-turbo",
       temperature: 1,
       max_tokens: 100
     });
 
-    responseStream.write(`\n`);
+    responseStream.write(`\n\n`);
 
     // Stream OpenAI response 2
     const res_2 = await streamOpenAIResponse(responseStream, {
-      messages: [{ role: "user", content: "Answer in two sentences: " + res_1 + " Answer: " }],
+      messages: [{ role: "user", content: "What is the meaning of this:\n\n" + res_1 + "\n\nAnswer: " }],
       model: "gpt-3.5-turbo",
       temperature: 0,
       max_tokens: 200

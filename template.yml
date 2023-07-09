@@ -28,5 +28,5 @@ Outputs:
   endpointexample:
     Description: "Lambda Function URL Endpoint Example"
     Value: !Sub
-      - "${FunctionUrl}?message=Ask%20a%20question%20Question:%20"
+      - "${FunctionUrl}?message=Write%20a%20haiku."
       - FunctionUrl: !GetAtt lambdaopenaiUrl.FunctionUrl
