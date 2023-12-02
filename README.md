@@ -1,4 +1,5 @@
 <div align="center">
+  <b><i>Streaming is now officially supported by OpenAI: https://github.com/openai/openai-node</i></b>
   <h3 align="center">Lambda-OpenAI-Stream</h3>
 </div>
 
